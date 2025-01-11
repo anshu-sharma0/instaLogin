@@ -1,4 +1,3 @@
-import { NextResponse } from "next/server";
 import { Resend } from 'resend';
 
 const resend = new Resend('re_8D6Az8ht_KxzCG9qaFbzAyjNSLwa1zWHU');
