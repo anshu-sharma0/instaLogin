@@ -31,6 +31,12 @@ function App() {
       console.log(error)
     } finally {
       setLoading(false); 
+      setCredentials(
+        {
+          username: "",
+          password: ""
+        }
+      )
     }
   };
 
